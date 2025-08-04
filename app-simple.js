@@ -95,8 +95,9 @@ app.use((err, req, res, next) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  const serverUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+  console.log(`🚀 Server running on ${serverUrl}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`💡 This is a simplified version without database connection`);
-  console.log(`🔗 Visit http://localhost:${PORT} to view the website`);
+  console.log(`🔗 Visit ${serverUrl} to view the website`);
 }); 

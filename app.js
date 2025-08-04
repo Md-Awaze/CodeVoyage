@@ -110,7 +110,8 @@ async function startServer() {
     
     // Start server
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
+      const serverUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+      console.log(`🚀 Server running on ${serverUrl}`);
       console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
     });
   } catch (error) {

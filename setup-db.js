@@ -2,13 +2,26 @@ const { Client } = require('pg');
 require('dotenv').config();
 
 async function setupDatabase() {
-    const client = new Client({
-        host: process.env.DB_HOST || 'localhost',
-        port: process.env.DB_PORT || 5432,
-        user: process.env.DB_USER || 'postgres',
-        password: process.env.DB_PASSWORD || 'password',
-        database: 'postgres' // Connect to default database first
-    });
+    // Determine if we're in production (Render) or development (local)
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.PGHOST?.includes('render.com');
+    
+    const clientConfig = {
+        host: process.env.PGHOST,
+        port: process.env.PGPORT,
+        user: process.env.PGUSER,
+        password: process.env.PGPASSWORD,
+        database: 'postgres', // Connect to default database first
+    };
+
+    // Add SSL configuration only for production/Render
+    if (isProduction) {
+        clientConfig.ssl = {
+            require: true,
+            rejectUnauthorized: false
+        };
+    }
+
+    const client = new Client(clientConfig);
 
     try {
         await client.connect();
@@ -17,13 +30,13 @@ async function setupDatabase() {
         // Check if database exists
         const dbExists = await client.query(
             "SELECT 1 FROM pg_database WHERE datname = $1",
-            [process.env.DB_NAME || 'data_science_consultancy']
+            [process.env.PGDATABASE]
         );
 
         if (dbExists.rows.length === 0) {
             // Create database
             await client.query(
-                `CREATE DATABASE "${process.env.DB_NAME || 'data_science_consultancy'}"`
+                `CREATE DATABASE "${process.env.PGDATABASE}"`
             );
             console.log('✅ Database created successfully');
         } else {

@@ -106,12 +106,13 @@ data-science-consultancy/
    ```env
    PORT=3000
    NODE_ENV=development
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_NAME=data_science_consultancy
-   DB_USER=postgres
-   DB_PASSWORD=your_password
+   PGHOST=localhost
+   PGPORT=5432
+   PGDATABASE=data_science_consultancy
+   PGUSER=postgres
+   PGPASSWORD=your_password
    SESSION_SECRET=your-super-secret-session-key
+   BASE_URL=http://localhost:3000
    ```
 
 4. **Set up PostgreSQL database**
@@ -129,7 +130,7 @@ data-science-consultancy/
    ```
 
 6. **Access the website**
-   Open your browser and navigate to `http://localhost:3000`
+   Open your browser and navigate to your application URL (default: `http://localhost:3000`)
 
 ## 🔧 Configuration
 
@@ -141,11 +142,11 @@ The application uses Sequelize ORM for database operations. The database configu
 
 - `PORT`: Server port (default: 3000)
 - `NODE_ENV`: Environment mode (development/production)
-- `DB_HOST`: PostgreSQL host
-- `DB_PORT`: PostgreSQL port
-- `DB_NAME`: Database name
-- `DB_USER`: Database username
-- `DB_PASSWORD`: Database password
+- `PGHOST`: PostgreSQL host
+- `PGPORT`: PostgreSQL port
+- `PGDATABASE`: Database name
+- `PGUSER`: Database username
+- `PGPASSWORD`: Database password
 - `SESSION_SECRET`: Session encryption key
 
 ## 📱 Features

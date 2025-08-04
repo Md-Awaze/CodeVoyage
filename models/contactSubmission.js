@@ -1,13 +1,25 @@
 const { Pool } = require('pg');
 
 // Database configuration using standard PostgreSQL environment variables
-const pool = new Pool({
+const isProduction = process.env.NODE_ENV === 'production' || process.env.PGHOST?.includes('render.com');
+
+const poolConfig = {
   user: process.env.PGUSER || 'postgres',
-  host: process.env.PGHOST || 'localhost',
+  host: process.env.PGHOST,
   database: process.env.PGDATABASE || 'contact_form',
   password: process.env.PGPASSWORD || 'mysecretpassword',
   port: process.env.PGPORT || 5432,
-});
+};
+
+// Add SSL configuration only for production/Render
+if (isProduction) {
+  poolConfig.ssl = {
+    require: true,
+    rejectUnauthorized: false
+  };
+}
+
+const pool = new Pool(poolConfig);
 
 // Test database connection
 let dbConnected = false;

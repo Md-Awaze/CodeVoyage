@@ -13,18 +13,18 @@
    ```
 
 3. **Access the website:**
-   Open your browser and go to `http://localhost:3000`
+   Open your browser and go to your application URL (default: `http://localhost:3000`)
 
 ## 📋 Available Pages
 
-- **Home**: `http://localhost:3000/`
-- **Our Clients**: `http://localhost:3000/our-clients`
-- **Our Services**: `http://localhost:3000/our-services`
+- **Home**: `/`
+- **Our Clients**: `/our-clients`
+- **Our Services**: `/our-services`
 
-- **Why Us**: `http://localhost:3000/why-us`
-- **Articles**: `http://localhost:3000/articles`
-- **Careers**: `http://localhost:3000/careers`
-- **Contact Us**: `http://localhost:3000/contact-us`
+- **Why Us**: `/why-us`
+- **Articles**: `/articles`
+- **Careers**: `/careers`
+- **Contact Us**: `/contact-us`
 
 ## 🗄️ Full Setup with Database
 
@@ -138,4 +138,4 @@ The website is fully responsive and optimized for:
 
 ---
 
-**Ready to use! The application is running on http://localhost:3000** 
+**Ready to use! The application is running on your configured URL** 
