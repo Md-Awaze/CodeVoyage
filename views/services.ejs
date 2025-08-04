@@ -1,0 +1,60 @@
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Comprehensive data science and IT consulting services for businesses, researchers, and organizations</p>
+    </div>
+</section>
+
+<!-- Core Data Science Services -->
+<section class="services-section core-ds-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Core Data Science Services</h2>
+            <p>Unlock the power of your data with our advanced analytics and modeling solutions</p>
+        </div>
+        <div class="services-grid">
+            <% coreDataScienceServices.forEach(function(service) { %>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas <%= service.icon %>"></i>
+                    </div>
+                    <h3><%= service.title %></h3>
+                    <p><%= service.description %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<!-- IT Consulting Services -->
+<section class="services-section it-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>IT Consulting Services</h2>
+            <p>Empowering your business with modern web and data solutions</p>
+        </div>
+        <div class="services-grid">
+            <% itConsultingServices.forEach(function(service) { %>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas <%= service.icon %>"></i>
+                    </div>
+                    <h3><%= service.title %></h3>
+                    <p><%= service.description %></p>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Get Started?</h2>
+            <p>Contact us for a free consultation and discover how our services can help you achieve your goals.</p>
+            <a href="/contact-us" class="btn btn-primary">Contact Us</a>
+        </div>
+    </div>
+</section> 

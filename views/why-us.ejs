@@ -1,0 +1,144 @@
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Why Choose Us</h1>
+        <p>Discover what makes us the leading choice for data science consulting and solutions</p>
+    </div>
+</section>
+
+<!-- Interactive Flip Cards Section -->
+<section class="flip-cards-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Advantages</h2>
+            <p>Click on each card to discover what makes us different</p>
+        </div>
+        
+        <div class="flip-cards-grid">
+            <% advantages.forEach(function(advantage) { %>
+                <div class="flip-card" role="button" tabindex="0" aria-label="Click to flip <%= advantage.title %> card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <span class="card-icon"><%= advantage.icon %></span>
+                            <h3><%= advantage.title %></h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4><%= advantage.title %></h4>
+                            <p><%= advantage.description %></p>
+                            <div class="card-details">
+                                <ul>
+                                    <% advantage.details.forEach(function(detail) { %>
+                                        <li><%= detail %></li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number"><%= stats.projectsCompleted %>+</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><%= stats.clientSatisfaction %></div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><%= stats.averageROI %></div>
+                <div class="stat-label">Average ROI</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number"><%= stats.teamSize %></div>
+                <div class="stat-label">Expert Team Members</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>What Our Clients Say</h2>
+            <p>Hear from the organizations we've helped transform</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <% testimonials.forEach(function(testimonial) { %>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"<%= testimonial.quote %>"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <strong><%= testimonial.author %></strong>
+                        <span><%= testimonial.position %>, <%= testimonial.company %></span>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<!-- Methodology Section -->
+<section class="methodology-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Our Methodology</h2>
+            <p>Proven approach to delivering exceptional results</p>
+        </div>
+        
+        <div class="methodology-steps">
+            <div class="methodology-step">
+                <div class="step-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Deep Understanding</h3>
+                <p>We start by thoroughly understanding your business, data, and objectives to develop tailored solutions.</p>
+            </div>
+            
+            <div class="methodology-step">
+                <div class="step-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Custom Development</h3>
+                <p>Our team develops custom solutions using the latest technologies and best practices in data science.</p>
+            </div>
+            
+            <div class="methodology-step">
+                <div class="step-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Rapid Implementation</h3>
+                <p>We implement solutions quickly and efficiently, ensuring minimal disruption to your operations.</p>
+            </div>
+            
+            <div class="methodology-step">
+                <div class="step-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Continuous Optimization</h3>
+                <p>We monitor performance and continuously optimize solutions to maximize your ROI and business impact.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Experience the Difference?</h2>
+            <p>Let's discuss how our expertise can help you achieve your business goals.</p>
+            <a href="/contact-us" class="btn btn-primary">Get Started Today</a>
+        </div>
+    </div>
+</section> 

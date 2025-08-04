@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/vintage-clients.css">
+    <link rel="stylesheet" href="/css/vintage-articles.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="/" class="logo">
+                        <img src="/images/logo.png" alt="CodeVoyage Logo" class="logo-img" />
+                        <span class="brand-name">CodeVoyage</span>
+                    </a>
+                </div>
+                
+                <div class="navbar-menu">
+                    <ul class="nav-links">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link <%= currentPage === '/' ? 'active' : '' %>">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/our-clients" class="nav-link <%= currentPage === '/our-clients' ? 'active' : '' %>">Our Clients</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/our-services" class="nav-link <%= currentPage === '/our-services' ? 'active' : '' %>">Our Services</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/why-us" class="nav-link <%= currentPage === '/why-us' ? 'active' : '' %>">Why Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/articles" class="nav-link <%= currentPage === '/articles' ? 'active' : '' %>">Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/careers" class="nav-link <%= currentPage === '/careers' ? 'active' : '' %>">Careers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/contact-us" class="nav-link <%= currentPage === '/contact-us' ? 'active' : '' %>">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="navbar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <%- body %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="/images/logo.png" alt="CodeVoyage Logo" class="footer-logo" />
+                        <span>CodeVoyage</span>
+                    </div>
+                    <p>Transforming Data, Code, and Beyond.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="/our-services">Data Analytics</a></li>
+                        <li><a href="/our-services">Machine Learning</a></li>
+                        <li><a href="/our-services">AI Solutions</a></li>
+                        <li><a href="/our-services">Data Strategy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+
+                        <li><a href="/why-us">Why Choose Us</a></li>
+                        <li><a href="/careers">Careers</a></li>
+                        <li><a href="/articles">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> hello@datascienceconsultancy.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Data Science Consultancy. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    <script src="/js/vintage-clients.js"></script>
+    <script src="/js/vintage-articles.js"></script>
+    <script src="/js/services-modal.js"></script>
+    <script src="/js/contact-form.js"></script>
+    <script src="/js/contact.js"></script>
+    <script src="/js/cardFlip.js"></script>
+</body>
+</html> 

@@ -1,0 +1,95 @@
+<!-- Book Header -->
+<section class="book-header">
+    <div class="container">
+        <div class="book-title">
+            <div class="chapter-title">Chapter I</div>
+            <h1 class="main-title">Articles & Insights</h1>
+            <p class="subtitle">A collection of knowledge and wisdom from the frontiers of data science</p>
+            <div class="decorative-line"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Book Content -->
+<section class="book-content">
+    <div class="container">
+        <!-- Opening Text -->
+        <div class="book-intro">
+            <div class="opening-text">
+                In these pages, we share the wisdom gathered from years of experience in the ever-evolving landscape of data science. Each article represents a chapter in our ongoing journey of discovery, innovation, and transformation.
+            </div>
+        </div>
+
+        <!-- Featured Article -->
+        <div class="featured-article">
+            <h2 class="featured-title"><%= featuredArticle.title %></h2>
+            <p class="featured-excerpt"><%= featuredArticle.excerpt %></p>
+            <div class="featured-meta">
+                <span class="category-tag"><%= featuredArticle.category %></span>
+                <span class="publish-date"><%= new Date(featuredArticle.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+                <span class="read-time"><%= featuredArticle.readTime %></span>
+            </div>
+            <div class="article-author">— By <%= featuredArticle.author %></div>
+            <a href="#" class="read-more-btn">Continue Reading</a>
+        </div>
+
+        <!-- Articles Container -->
+        <div class="articles-container">
+            <% articles.forEach(function(article, index) { %>
+                <div class="book-article">
+                    <div class="article-content">
+                        <div class="article-header">
+                            <h3 class="article-title">Chapter <%= (index + 2).toString().padStart(2, '0') %>: <%= article.title %></h3>
+                            <div class="article-meta">
+                                <span class="category-tag"><%= article.category %></span>
+                                <span class="publish-date"><%= new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+                                <span class="read-time"><%= article.readTime %></span>
+                            </div>
+                        </div>
+                        
+                        <div class="article-body">
+                            <%= article.excerpt %>
+                        </div>
+                        
+                        <div class="article-footer">
+                            <div class="article-author">— By <%= article.author %></div>
+                            <a href="#" class="read-more-btn">Read Chapter</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section">
+    <div class="container">
+        <div class="categories-container">
+            <h2 class="categories-title">Browse by Category</h2>
+            <p class="subtitle">Find content that speaks to your interests</p>
+            
+            <div class="categories-grid">
+                <% categories.forEach(function(category) { %>
+                    <a href="#" class="category-card">
+                        <%= category %>
+                    </a>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2 class="newsletter-title">Stay Updated</h2>
+            <p class="newsletter-text">Subscribe to our newsletter to receive the latest chapters of knowledge and insights directly to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section> 

@@ -1,0 +1,276 @@
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title"><%= hero.title %></h1>
+            <p class="hero-subtitle"><%= hero.subtitle %></p>
+            <div class="hero-actions">
+                <a href="/contact-us" class="btn btn-primary"><%= hero.cta %></a>
+                <a href="#our-services" class="btn btn-secondary">Our Services</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-visual">
+                <i class="fas fa-chart-line"></i>
+                <i class="fas fa-brain"></i>
+                <i class="fas fa-cogs"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="our-services" class="services">
+    <div class="container">
+        <!-- Core Data Science Services -->
+        <div class="services-section">
+            <div class="section-header">
+                <h2>🔷 Core Data Science Services</h2>
+                <p>Advanced analytics and data science solutions to transform your business operations</p>
+            </div>
+            
+            <div class="services-grid">
+                <% coreDataScienceServices.forEach(function(service) { %>
+                    <% if (service.title === 'Statistical Data Science') { %>
+                        <div class="service-card fade-in-up" data-service="statistical-data-science" data-title="Statistical Data Science" data-description="Deep-dive statistical modeling, regression analysis, and pattern discovery for comprehensive insight extraction. Our advanced statistical techniques help uncover hidden relationships in your data, enabling data-driven decision making with confidence intervals and predictive modeling." data-image="/images/services/Statistical data analysis.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/Statistical data analysis.png" alt="Statistical Data Science illustration" class="stat-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Surveys') { %>
+                        <div class="service-card fade-in-up" data-service="surveys" data-title="Surveys" data-description="Comprehensive survey design, distribution, and analysis services. We create targeted questionnaires, implement multi-channel distribution strategies, and provide detailed statistical analysis of responses to extract actionable insights for your business decisions." data-image="/images/services/surveys.jpeg">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/surveys.jpeg" alt="Surveys" class="survey-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Forecasting and Prediction') { %>
+                        <div class="service-card fade-in-up" data-service="forecasting" data-title="Forecasting and Prediction" data-description="Advanced time series analysis and predictive modeling using sophisticated algorithms. Our forecasting models help predict future trends, demand patterns, and market movements with high accuracy, enabling proactive business planning and risk management." data-image="/images/services/forecasting.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/forecasting.png" alt="Forecasting illustration" class="forecast-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Spatial Analysis and Mapping') { %>
+                        <div class="service-card fade-in-up" data-service="spatial-analysis" data-title="Spatial Analysis and Mapping" data-description="Geospatial data analysis and interactive mapping solutions for location-based insights. We create dynamic maps, analyze spatial patterns, and provide location intelligence to optimize business operations, site selection, and market expansion strategies." data-image="/images/services/Spatial analysis and mapping.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/Spatial analysis and mapping.png" alt="Spatial Analysis illustration" class="spatial-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Business and Risk Analysis') { %>
+                        <div class="service-card fade-in-up" data-service="business-risk-analysis" data-title="Business and Risk Analysis" data-description="Comprehensive business intelligence and risk assessment to support strategic decision-making. We analyze market trends, competitive landscapes, and potential risks to help organizations make informed decisions and develop robust risk mitigation strategies." data-image="/images/services/risk-analysis.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/risk-analysis.png" alt="Business and Risk Analysis illustration" class="risk-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Big Data and Machine Learning') { %>
+                        <div class="service-card fade-in-up" data-service="big-data-ml" data-title="Big Data and Machine Learning" data-description="Scalable big data processing and advanced machine learning algorithms for complex datasets. We build custom ML models, implement data pipelines, and create intelligent systems that learn and adapt to your business needs, driving automation and predictive capabilities." data-image="/images/services/machine-learning.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/machine-learning.png" alt="Machine Learning illustration" class="ml-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Simulation and Optimisation') { %>
+                        <div class="service-card fade-in-up" data-service="simulation-optimisation" data-title="Simulation and Optimisation" data-description="Computer simulations and optimization techniques to improve processes and performance. We create mathematical models, run scenario analyses, and optimize complex systems to maximize efficiency, reduce costs, and enhance operational performance." data-image="/images/services/Simulation and optimisation.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/Simulation and optimisation.png" alt="Simulation and Optimisation illustration" class="simulation-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Mining Analytics') { %>
+                        <div class="service-card fade-in-up" data-service="mining-analytics" data-title="Mining Analytics" data-description="Specialized analytics for mining operations, including predictive maintenance and resource optimization. We analyze geological data, optimize extraction processes, and implement predictive maintenance systems to improve safety, efficiency, and profitability in mining operations." data-image="/images/services/Mining analysis.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/Mining analysis.png" alt="Mining Analytics illustration" class="mining-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Interactive Dashboards') { %>
+                        <div class="service-card fade-in-up" data-service="interactive-dashboards" data-title="Interactive Dashboards" data-description="Real-time interactive dashboards and data visualization tools for better insights. We create dynamic, user-friendly dashboards that provide real-time monitoring, interactive filtering, and intuitive data exploration capabilities for stakeholders at all levels." data-image="/images/services/Interactive dashboards.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/Interactive dashboards.png" alt="Interactive Dashboards illustration" class="dashboard-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="service-card fade-in-up">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                            </div>
+                            <div class="service-image">
+                                <img src="<%= service.image %>" alt="<%= service.title %>" onerror="this.style.display='none'">
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
+        </div>
+
+        <!-- IT Consulting Services -->
+        <div class="services-section">
+            <div class="section-header">
+                <h2>💻 IT Consulting Services</h2>
+                <p>Technology solutions to support your digital transformation journey</p>
+            </div>
+            
+            <div class="services-grid">
+                <% itConsultingServices.forEach(function(service) { %>
+                    <% if (service.title === 'Website Creation') { %>
+                        <div class="service-card fade-in-up" data-service="website-creation" data-title="Website Creation" data-description="Custom website development for startups, researchers, and businesses with modern design and functionality. We build responsive, SEO-optimized websites with user-friendly interfaces, fast loading times, and scalable architecture to establish your digital presence." data-image="/images/services/Website creation.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/Website creation.png" alt="Website Creation illustration" class="website-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if (service.title === 'Data Handling Services') { %>
+                        <div class="service-card fade-in-up" data-service="data-handling" data-title="Data Handling Services" data-description="Comprehensive data collection, cleaning, storage, labeling, and governance solutions. We establish robust data pipelines, implement data quality controls, and create scalable storage architectures to ensure your data is clean, secure, and accessible." data-image="/images/services/Data handling services.png">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                                <div class="image-container">
+                                    <img src="/images/services/Data handling services.png" alt="Data Handling Services illustration" class="data-image">
+                                </div>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="service-card fade-in-up">
+                            <div class="service-icon">
+                                <span class="service-emoji"><%= service.icon %></span>
+                            </div>
+                            <div class="service-content">
+                                <h3><%= service.title %></h3>
+                                <p><%= service.description %></p>
+                            </div>
+                            <div class="service-image">
+                                <img src="<%= service.image %>" alt="<%= service.title %>" onerror="this.style.display='none'">
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Modal -->
+<div id="serviceModal" class="service-modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-header">
+            <h2 id="modalTitle"></h2>
+        </div>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="">
+            </div>
+            <div class="modal-description">
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">25</div>
+                <div class="stat-label">Expert Team Members</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">300%</div>
+                <div class="stat-label">Average ROI</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Let's discuss how our data science expertise can help you achieve your goals.</p>
+            <a href="/contact-us" class="btn btn-primary">Get Started Today</a>
+        </div>
+    </div>
+</section> 
