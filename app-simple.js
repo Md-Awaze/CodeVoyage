@@ -11,7 +11,6 @@ require('dotenv').config();
 const indexRoutes = require('./routes/index');
 const clientsRoutes = require('./routes/clients');
 const servicesRoutes = require('./routes/services');
-
 const whyUsRoutes = require('./routes/why-us');
 const articlesRoutes = require('./routes/articles');
 const careersRoutes = require('./routes/careers');
@@ -20,7 +19,7 @@ const contactRoutes = require('./routes/contact');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
+// Security middleware with production-ready CSP
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -68,14 +67,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'layout');
 
-// Static files middleware
+// Static files middleware - serve from 'public' directory
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: process.env.NODE_ENV === 'production' ? '1d' : 0,
   etag: true,
   lastModified: true
 }));
 
-// Specific CSS serving with proper headers
+// CSS-specific headers for production
 app.use('/css', (req, res, next) => {
   res.setHeader('Content-Type', 'text/css');
   res.setHeader('Cache-Control', 'public, max-age=86400');
@@ -109,7 +108,6 @@ app.use((req, res, next) => {
 app.use('/', indexRoutes);
 app.use('/our-clients', clientsRoutes);
 app.use('/our-services', servicesRoutes);
-
 app.use('/why-us', whyUsRoutes);
 app.use('/articles', articlesRoutes);
 app.use('/careers', careersRoutes);
@@ -141,4 +139,8 @@ app.listen(PORT, () => {
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`💡 This is a simplified version without database connection`);
   console.log(`🔗 Visit ${serverUrl} to view the website`);
+  console.log(`📁 Static files served from: ${path.join(__dirname, 'public')}`);
+  console.log(`🎨 CSS files available at: ${serverUrl}/css/`);
+  console.log(`🖼️ Images available at: ${serverUrl}/images/`);
+  console.log(`📜 JS files available at: ${serverUrl}/js/`);
 }); 
