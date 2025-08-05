@@ -22,7 +22,19 @@ const PORT = process.env.PORT || 3000;
 
 // Security middleware
 app.use(helmet({
-  contentSecurityPolicy: false, // Disable for development
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      connectSrc: ["'self'"],
+      frameSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: []
+    }
+  }
 }));
 
 // Compression middleware
@@ -55,7 +67,27 @@ app.use(expressLayouts);
 app.set('layout', 'layout');
 
 // Static files middleware
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: process.env.NODE_ENV === 'production' ? '1d' : 0,
+  etag: true,
+  lastModified: true
+}));
+
+// Debug middleware for static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use('/css', (req, res, next) => {
+    console.log(`📁 CSS Request: ${req.path}`);
+    next();
+  });
+  app.use('/js', (req, res, next) => {
+    console.log(`📁 JS Request: ${req.path}`);
+    next();
+  });
+  app.use('/images', (req, res, next) => {
+    console.log(`📁 Image Request: ${req.path}`);
+    next();
+  });
+}
 
 // Global variables for templates
 app.use((req, res, next) => {

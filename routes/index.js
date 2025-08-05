@@ -1,6 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
+// Debug route for testing static files in production
+if (process.env.NODE_ENV === 'production') {
+  router.get('/debug-static', (req, res) => {
+    res.json({
+      message: 'Static file debug route',
+      environment: process.env.NODE_ENV,
+      baseUrl: req.protocol + '://' + req.get('host'),
+      cssPath: '/css/style.css',
+      jsPath: '/js/main.js',
+      imagePath: '/images/logo.png'
+    });
+  });
+}
+
 // Home page route
 router.get('/', (req, res) => {
   res.render('index', {
