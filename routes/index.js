@@ -13,6 +13,23 @@ if (process.env.NODE_ENV === 'production') {
       imagePath: '/images/logo.png'
     });
   });
+
+  router.get('/test-css', (req, res) => {
+    res.setHeader('Content-Type', 'text/css');
+    res.send(`
+      /* Test CSS */
+      body { 
+        background-color: red !important; 
+        color: white !important; 
+      }
+      .test-css-loaded { 
+        display: block !important; 
+        background: green !important; 
+        padding: 20px !important; 
+        margin: 20px !important; 
+      }
+    `);
+  });
 }
 
 // Home page route

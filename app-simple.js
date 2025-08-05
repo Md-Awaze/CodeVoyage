@@ -34,7 +34,9 @@ app.use(helmet({
       objectSrc: ["'none'"],
       upgradeInsecureRequests: []
     }
-  }
+  },
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
 // Compression middleware
@@ -72,6 +74,13 @@ app.use(express.static(path.join(__dirname, 'public'), {
   etag: true,
   lastModified: true
 }));
+
+// Specific CSS serving with proper headers
+app.use('/css', (req, res, next) => {
+  res.setHeader('Content-Type', 'text/css');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  next();
+});
 
 // Debug middleware for static files in production
 if (process.env.NODE_ENV === 'production') {
