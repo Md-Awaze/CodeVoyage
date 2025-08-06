@@ -28,13 +28,12 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      connectSrc: ["'self'"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+      imgSrc: ["'self'", "data:", "https:", "blob:"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      connectSrc: ["'self'", "http://localhost:3000", "https://localhost:3000"],
       frameSrc: ["'self'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: []
+      objectSrc: ["'none'"]
     }
   },
   crossOriginEmbedderPolicy: false,
@@ -84,21 +83,19 @@ app.use('/css', (req, res, next) => {
   next();
 });
 
-// Debug middleware for static files in production
-if (process.env.NODE_ENV === 'production') {
-  app.use('/css', (req, res, next) => {
-    console.log(`📁 CSS Request: ${req.path}`);
-    next();
-  });
-  app.use('/js', (req, res, next) => {
-    console.log(`📁 JS Request: ${req.path}`);
-    next();
-  });
-  app.use('/images', (req, res, next) => {
-    console.log(`📁 Image Request: ${req.path}`);
-    next();
-  });
-}
+// Debug middleware for static files
+app.use('/css', (req, res, next) => {
+  console.log(`📁 CSS Request: ${req.path}`);
+  next();
+});
+app.use('/js', (req, res, next) => {
+  console.log(`📁 JS Request: ${req.path}`);
+  next();
+});
+app.use('/images', (req, res, next) => {
+  console.log(`📁 Image Request: ${req.path}`);
+  next();
+});
 
 // Global variables for templates
 app.use((req, res, next) => {
