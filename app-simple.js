@@ -68,18 +68,23 @@ app.set('layout', 'layout');
 
 // Static files middleware - serve from 'public' directory
 // This must come BEFORE any route-specific middleware
-app.use(express.static(path.join(__dirname, 'public'), {
+const publicPath = path.join(__dirname, 'public');
+console.log('📁 Static files path:', publicPath);
+console.log('📁 Static files exist:', require('fs').existsSync(publicPath));
+
+app.use(express.static(publicPath, {
   maxAge: process.env.NODE_ENV === 'production' ? '1d' : 0,
   etag: true,
   lastModified: true,
-  setHeaders: (res, path) => {
+  setHeaders: (res, filePath) => {
+    console.log('📁 Serving static file:', filePath);
     // Set proper MIME types for different file types
-    if (path.endsWith('.css')) {
+    if (filePath.endsWith('.css')) {
       res.setHeader('Content-Type', 'text/css');
-    } else if (path.endsWith('.js')) {
+    } else if (filePath.endsWith('.js')) {
       res.setHeader('Content-Type', 'application/javascript');
-    } else if (path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg') || path.endsWith('.gif') || path.endsWith('.ico')) {
-      res.setHeader('Content-Type', `image/${path.split('.').pop()}`);
+    } else if (filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') || filePath.endsWith('.gif') || filePath.endsWith('.ico')) {
+      res.setHeader('Content-Type', `image/${filePath.split('.').pop()}`);
     }
     
     // Set cache headers for production
@@ -88,6 +93,57 @@ app.use(express.static(path.join(__dirname, 'public'), {
     }
   }
 }));
+
+// Add explicit routes for static files as fallback
+app.get('/css/:file', (req, res) => {
+  const fileName = decodeURIComponent(req.params.file);
+  const filePath = path.join(__dirname, 'public', 'css', fileName);
+  console.log('📁 CSS fallback route:', filePath);
+  if (require('fs').existsSync(filePath)) {
+    res.setHeader('Content-Type', 'text/css');
+    res.sendFile(filePath);
+  } else {
+    console.log('❌ CSS file not found:', filePath);
+    res.status(404).send('CSS file not found');
+  }
+});
+
+app.get('/js/:file', (req, res) => {
+  const fileName = decodeURIComponent(req.params.file);
+  const filePath = path.join(__dirname, 'public', 'js', fileName);
+  console.log('📁 JS fallback route:', filePath);
+  if (require('fs').existsSync(filePath)) {
+    res.setHeader('Content-Type', 'application/javascript');
+    res.sendFile(filePath);
+  } else {
+    console.log('❌ JS file not found:', filePath);
+    res.status(404).send('JS file not found');
+  }
+});
+
+app.get('/images/:file', (req, res) => {
+  const fileName = decodeURIComponent(req.params.file);
+  const filePath = path.join(__dirname, 'public', 'images', fileName);
+  console.log('📁 Image fallback route:', filePath);
+  if (require('fs').existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    console.log('❌ Image file not found:', filePath);
+    res.status(404).send('Image file not found');
+  }
+});
+
+app.get('/images/services/:file', (req, res) => {
+  const fileName = decodeURIComponent(req.params.file);
+  const filePath = path.join(__dirname, 'public', 'images', 'services', fileName);
+  console.log('📁 Service image fallback route:', filePath);
+  if (require('fs').existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    console.log('❌ Service image file not found:', filePath);
+    res.status(404).send('Service image file not found');
+  }
+});
 
 // Debug middleware for static files (development only)
 if (process.env.NODE_ENV === 'development') {
@@ -120,6 +176,53 @@ app.get('/health', (req, res) => {
     environment: process.env.NODE_ENV || 'development',
     version: '1.0.0'
   });
+});
+
+// Debug route to list static files
+app.get('/debug-files', (req, res) => {
+  const fs = require('fs');
+  const path = require('path');
+  
+  const publicPath = path.join(__dirname, 'public');
+  const files = {};
+  
+  try {
+    // List CSS files
+    const cssPath = path.join(publicPath, 'css');
+    if (fs.existsSync(cssPath)) {
+      files.css = fs.readdirSync(cssPath);
+    }
+    
+    // List JS files
+    const jsPath = path.join(publicPath, 'js');
+    if (fs.existsSync(jsPath)) {
+      files.js = fs.readdirSync(jsPath);
+    }
+    
+    // List image files
+    const imagesPath = path.join(publicPath, 'images');
+    if (fs.existsSync(imagesPath)) {
+      files.images = fs.readdirSync(imagesPath);
+      
+      // List service images
+      const servicesPath = path.join(imagesPath, 'services');
+      if (fs.existsSync(servicesPath)) {
+        files.services = fs.readdirSync(servicesPath);
+      }
+    }
+    
+    res.json({
+      publicPath,
+      publicPathExists: fs.existsSync(publicPath),
+      files
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+      publicPath,
+      publicPathExists: fs.existsSync(publicPath)
+    });
+  }
 });
 
 // Routes
