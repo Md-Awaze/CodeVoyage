@@ -7,6 +7,8 @@ router.get('/', (req, res) => {
     title: 'Articles & Insights - CodeVoyage',
     description: 'Stay updated with the latest trends, insights, and thought leadership in data science and AI.',
     page: 'articles',
+    additionalCSS: ['vintage-articles.css'],
+    additionalJS: ['vintage-articles.js'],
     featuredArticle: {
       title: 'The Future of AI in Healthcare: Opportunities and Challenges',
       excerpt: 'Exploring how artificial intelligence is transforming healthcare delivery, from diagnostic tools to personalized medicine, and the ethical considerations that come with it.',

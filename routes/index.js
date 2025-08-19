@@ -180,6 +180,8 @@ router.get('/', (req, res) => {
     title: 'CodeVoyage - Transforming Data, Code, and Beyond',
     description: 'Leading data science consultancy helping businesses transform through advanced analytics and AI solutions.',
     page: 'home',
+    additionalCSS: ['contact.css'],
+    additionalJS: ['services-modal.js', 'cardFlip.js'],
     hero: {
       title: 'Transform Your Business with Data Science',
       subtitle: 'We help organizations unlock the power of their data through advanced analytics, machine learning, and AI solutions.',

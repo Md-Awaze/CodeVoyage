@@ -30,8 +30,7 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'"],
       connectSrc: ["'self'"],
       frameSrc: ["'self'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: []
+      objectSrc: ["'none'"]
     }
   },
   crossOriginEmbedderPolicy: false,
@@ -68,21 +67,30 @@ app.use(expressLayouts);
 app.set('layout', 'layout');
 
 // Static files middleware - serve from 'public' directory
+// This must come BEFORE any route-specific middleware
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: process.env.NODE_ENV === 'production' ? '1d' : 0,
   etag: true,
-  lastModified: true
+  lastModified: true,
+  setHeaders: (res, path) => {
+    // Set proper MIME types for different file types
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    } else if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    } else if (path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg') || path.endsWith('.gif') || path.endsWith('.ico')) {
+      res.setHeader('Content-Type', `image/${path.split('.').pop()}`);
+    }
+    
+    // Set cache headers for production
+    if (process.env.NODE_ENV === 'production') {
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    }
+  }
 }));
 
-// CSS-specific headers for production
-app.use('/css', (req, res, next) => {
-  res.setHeader('Content-Type', 'text/css');
-  res.setHeader('Cache-Control', 'public, max-age=86400');
-  next();
-});
-
-// Debug middleware for static files in production
-if (process.env.NODE_ENV === 'production') {
+// Debug middleware for static files (development only)
+if (process.env.NODE_ENV === 'development') {
   app.use('/css', (req, res, next) => {
     console.log(`📁 CSS Request: ${req.path}`);
     next();
@@ -102,6 +110,16 @@ app.use((req, res, next) => {
   res.locals.currentPage = req.path;
   res.locals.baseUrl = req.protocol + '://' + req.get('host');
   next();
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+    version: '1.0.0'
+  });
 });
 
 // Routes

@@ -79,7 +79,9 @@ router.get('/', (req, res) => {
   res.render('contact', {
     title: 'Contact Us - CodeVoyage',
     description: 'Get in touch with our team to discuss your data science needs and how we can help transform your business.',
-    page: 'contact'
+    page: 'contact',
+    additionalCSS: ['contact.css'],
+    additionalJS: ['contact.js', 'contact-form.js']
   });
 });
 

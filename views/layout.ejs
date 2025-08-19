@@ -9,11 +9,15 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/style.css?v=<%= Date.now() %>">
-    <link rel="stylesheet" href="/css/vintage-clients.css?v=<%= Date.now() %>">
-    <link rel="stylesheet" href="/css/vintage-articles.css?v=<%= Date.now() %>">
-    <link rel="stylesheet" href="/css/contact.css?v=<%= Date.now() %>">
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Page-specific CSS -->
+    <% if (typeof additionalCSS !== 'undefined' && additionalCSS.length > 0) { %>
+        <% additionalCSS.forEach(function(cssFile) { %>
+            <link rel="stylesheet" href="/css/<%= cssFile %>">
+        <% }); %>
+    <% } %>
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -131,13 +135,14 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="/js/main.js?v=<%= Date.now() %>"></script>
-    <script src="/js/vintage-clients.js?v=<%= Date.now() %>"></script>
-    <script src="/js/vintage-articles.js?v=<%= Date.now() %>"></script>
-    <script src="/js/services-modal.js?v=<%= Date.now() %>"></script>
-    <script src="/js/contact-form.js?v=<%= Date.now() %>"></script>
-    <script src="/js/contact.js?v=<%= Date.now() %>"></script>
-    <script src="/js/cardFlip.js?v=<%= Date.now() %>"></script>
+    <!-- Base JavaScript -->
+    <script src="/js/main.js"></script>
+    
+    <!-- Page-specific JavaScript -->
+    <% if (typeof additionalJS !== 'undefined' && additionalJS.length > 0) { %>
+        <% additionalJS.forEach(function(jsFile) { %>
+            <script src="/js/<%= jsFile %>"></script>
+        <% }); %>
+    <% } %>
 </body>
 </html> 

@@ -7,6 +7,8 @@ router.get('/', (req, res) => {
     title: 'Tales of Transformation - Our Clients',
     description: 'Chronicles of data science success stories - discover how we\'ve helped organizations achieve the extraordinary.',
     page: 'clients',
+    additionalCSS: ['vintage-clients.css'],
+    additionalJS: ['vintage-clients.js'],
     clients: [
       {
         name: 'TechCorp Inc.',
