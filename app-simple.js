@@ -72,6 +72,7 @@ const publicPath = path.join(__dirname, 'public');
 console.log('📁 Static files path:', publicPath);
 console.log('📁 Static files exist:', require('fs').existsSync(publicPath));
 
+// Enhanced static file middleware with better error handling
 app.use(express.static(publicPath, {
   maxAge: process.env.NODE_ENV === 'production' ? '1d' : 0,
   etag: true,
@@ -80,11 +81,17 @@ app.use(express.static(publicPath, {
     console.log('📁 Serving static file:', filePath);
     // Set proper MIME types for different file types
     if (filePath.endsWith('.css')) {
-      res.setHeader('Content-Type', 'text/css');
+      res.setHeader('Content-Type', 'text/css; charset=utf-8');
     } else if (filePath.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    } else if (filePath.endsWith('.png') || filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') || filePath.endsWith('.gif') || filePath.endsWith('.ico')) {
-      res.setHeader('Content-Type', `image/${filePath.split('.').pop()}`);
+      res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    } else if (filePath.endsWith('.png')) {
+      res.setHeader('Content-Type', 'image/png');
+    } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
+      res.setHeader('Content-Type', 'image/jpeg');
+    } else if (filePath.endsWith('.gif')) {
+      res.setHeader('Content-Type', 'image/gif');
+    } else if (filePath.endsWith('.ico')) {
+      res.setHeader('Content-Type', 'image/x-icon');
     }
     
     // Set cache headers for production
@@ -94,13 +101,14 @@ app.use(express.static(publicPath, {
   }
 }));
 
-// Add explicit routes for static files as fallback
-app.get('/css/:file', (req, res) => {
+// Comprehensive fallback routes for static files
+app.get('/css/:file(*)', (req, res) => {
   const fileName = decodeURIComponent(req.params.file);
   const filePath = path.join(__dirname, 'public', 'css', fileName);
   console.log('📁 CSS fallback route:', filePath);
+  
   if (require('fs').existsSync(filePath)) {
-    res.setHeader('Content-Type', 'text/css');
+    res.setHeader('Content-Type', 'text/css; charset=utf-8');
     res.sendFile(filePath);
   } else {
     console.log('❌ CSS file not found:', filePath);
@@ -108,12 +116,13 @@ app.get('/css/:file', (req, res) => {
   }
 });
 
-app.get('/js/:file', (req, res) => {
+app.get('/js/:file(*)', (req, res) => {
   const fileName = decodeURIComponent(req.params.file);
   const filePath = path.join(__dirname, 'public', 'js', fileName);
   console.log('📁 JS fallback route:', filePath);
+  
   if (require('fs').existsSync(filePath)) {
-    res.setHeader('Content-Type', 'application/javascript');
+    res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
     res.sendFile(filePath);
   } else {
     console.log('❌ JS file not found:', filePath);
@@ -121,10 +130,11 @@ app.get('/js/:file', (req, res) => {
   }
 });
 
-app.get('/images/:file', (req, res) => {
+app.get('/images/:file(*)', (req, res) => {
   const fileName = decodeURIComponent(req.params.file);
   const filePath = path.join(__dirname, 'public', 'images', fileName);
   console.log('📁 Image fallback route:', filePath);
+  
   if (require('fs').existsSync(filePath)) {
     res.sendFile(filePath);
   } else {
@@ -133,10 +143,11 @@ app.get('/images/:file', (req, res) => {
   }
 });
 
-app.get('/images/services/:file', (req, res) => {
+app.get('/images/services/:file(*)', (req, res) => {
   const fileName = decodeURIComponent(req.params.file);
   const filePath = path.join(__dirname, 'public', 'images', 'services', fileName);
   console.log('📁 Service image fallback route:', filePath);
+  
   if (require('fs').existsSync(filePath)) {
     res.sendFile(filePath);
   } else {
